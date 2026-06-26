@@ -1,0 +1,9 @@
+# Cline Rules for current workspace/project
+
+## 1. Initial skills
+
+Before starting every development task, I MUST read and understand the skills, starting with `.github/skills/common-development/SKILL.md` and then the skills for the specific task type (feature development, bug fixing, etc.), whent this skill is relevant for the task.
+
+## 2, Post-Task 
+
+After every task that makes essential changes to code, documentation, scripts, or configuration files, I MUST execute the post-task checklist defined in `.github/skills/post-task/SKILL.md` before reporting completion (calling attempt_completion).
