@@ -1,5 +1,5 @@
 # aisse-collection
-Collection of harness-components for AI-Supported Software Engineering (AISSE).
+Collection of harness-components for AI-Supported Software Engineering (AISSE) for GitHub Copilot and Cline development assistents.
 
 This repository contains a collection of harness-components that can be used to support AI-Supported Software Engineering (AISSE) tasks. The components are designed to facilitate the integration of AI techniques into software engineering processes, enabling developers to leverage AI capabilities for improved software development and maintenance.
 
