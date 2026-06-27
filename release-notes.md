@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.1.1 build 4
+Added symlink-skills.sh script.
+
 ## Version: 0.1.1 build 3
 Added Angular and TypeScript skills.
 
