@@ -12,9 +12,9 @@ This skill is applied after every task that makes essential changes to code, doc
 
 ---
 
-## Rules
+# Rules
 
-### 1. Update version
+## 1. Update version
 
 Update version in files, if they exist. First check existing of `sity-map.yaml` in workspace or in project root and read it to locate version files. If `site-map.yaml` does not exist, check for version files (`version.json` or `version.yaml`) in the following order:
 1. <project-root>
@@ -32,11 +32,11 @@ Use semantic versioning rules:
 
 Remember the new version.
 
-### 2. Update release notes
+## 2. Update release notes
 
 Insert the new version entry **at the beginning** (after the header, at line 3) in `<project-root>/release-notes.md` (if it exists). Include the remembered version number and a short explanation of the version update. Latest release appears first, oldest releases appear last. Do not reorder or overwrite previous entries. Increase a value of parameter `build` in `version.yaml` by 1. Update `datetime` to the current date and time in ISO 8601 format.
 
-### 3. Write commit text proposal
+## 3. Write commit text proposal
 
 Update **only** the workspace-root file: `commit-text-proposal.txt` (in the workspace root directory where this skill file is located, not in sub-project directories).
 
@@ -76,3 +76,5 @@ nit: Project: telegram/telegram-lib. Version 1.3.12. Swap let for const.
 doc: Project: telegram/telegram-lib. Version 2.3.15. Added usage section to README.md.
 ```
 
+## 4. Commit changes
+If the user explicitly requested to commit changes, call the script `scripts/make-commit.sh`.
