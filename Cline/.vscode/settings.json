@@ -1,0 +1,45 @@
+{
+  "cline.defaultModel": "qwen2.5:14b-instruct-q4_K_M",
+  "cline.maxFiles": 200,
+  "cline.maxTokens": 200000,
+  "cline.enableFileTree": true,
+  "cline.enableTerminal": true,
+  "cline.enableCommands": true,
+  "cline.enableFileEdits": true,
+  "cline.enableSearch": true,
+  "cline.enablePlanning": true,
+  "cline.thinkingEffort": "medium",
+
+  "cline.exclude": [
+    "**/.env",
+    "**/.env.*",
+    "**/.firebase/**",
+    "**/firebase-debug.log",
+    "**/firestore_export/**",
+    "**/storage_export/**",
+    "**/.runtimeconfig.json",
+    "**/serviceAccount*.json",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.cache/**",
+    "**/__pycache__/**"
+  ],
+
+  "files.exclude": {
+    "**/.env": true,
+    "**/.env.*": true,
+    "**/.firebase": true,
+    "**/firestore_export": true,
+    "**/storage_export": true
+  },
+
+  "search.exclude": {
+    "**/.env": true,
+    "**/.env.*": true,
+    "**/.firebase": true,
+    "**/firestore_export": true,
+    "**/storage_export": true
+  },
+
+}
