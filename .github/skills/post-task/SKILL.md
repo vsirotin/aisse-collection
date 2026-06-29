@@ -17,8 +17,8 @@ This skill is applied after every task that makes essential changes to code, doc
 ## 1. Update version
 
 Update version in files, if they exist. First check existing of `sity-map.yaml` in workspace or in project root and read it to locate version files. If `site-map.yaml` does not exist, check for version files (`version.json` or `version.yaml`) in the following order:
-1. <project-root>
-2. <project-root>/src/
+1. <root>
+2. <root>/src/
 4. <project-root>
 5. <project-root>/src/
 
