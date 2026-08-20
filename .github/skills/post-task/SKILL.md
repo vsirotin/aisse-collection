@@ -30,17 +30,15 @@ Use semantic versioning rules:
 - **Increment `build`** by 1 on every change regardless of which version segment was bumped.
 - **Update `datetime`** to the current date and time in ISO 8601 format.
 
-Remember the new version.
+Remember the new version for using in the next step (release notes update).
+
+### Special case with multi-project workspaces.
+If the workspace contains multiple sub-projects, you should determine which sub-projects were affected by the changes. If the changes affect multiple sub-projects, you should bump versions in all affected sub-projects. If the changes affect only one sub-project, you should bump version only in that sub-project.
 
 ## 2. Update release notes
 
 Insert the new version entry **at the beginning** (after the header, at line 3) in `<project-root>/release-notes.md` (if it exists). Include the remembered version number and a short explanation of the version update. Latest release appears first, oldest releases appear last. Do not reorder or overwrite previous entries. Increase a value of parameter `build` in `version.yaml` by 1. Update `datetime` to the current date and time in ISO 8601 format.
-
-## 3. Write commit text proposal
-
-Update **only** the workspace-root file: `commit-text-proposal.txt` (in the workspace root directory where this skill file is located, not in sub-project directories).
-
-Rewrite its content with the following format:
+Use the following format for the new entry:
 
 ```
 <prefix>: Project: <project>. Version: <current version>. <short label for update>.
@@ -51,8 +49,6 @@ Rewrite its content with the following format:
 - `<project>`: Full sub-project path from workspace root (e.g., `telegram/telegram-lib` or `telegram/telegram-cli`).
 - `<current version>`: The version from the changed sub-project's `src/version.yaml` after Rule 1.
 - `<short label for update>`: Concise description of what changed (2-10 words).
-
-**Multi-sub-project updates:** If the same commit affects multiple sub-projects, mention **only the main/primary sub-project** that drove the changes.
 
 Prefixes:
 
@@ -71,10 +67,19 @@ Prefixes:
 **Examples:**
 
 ```
-fix: Project: telegram/telegram-lib. Version 1.0.12. Closes #9, fix path issue.
-nit: Project: telegram/telegram-lib. Version 1.3.12. Swap let for const.
-doc: Project: telegram/telegram-lib. Version 2.3.15. Added usage section to README.md.
+fix: Project: stop-lib. Version 1.0.12. Closes #9, fix path issue.
+nit: Project: stop-server. Version 1.3.12. Swap let for const.
+doc: Project: stop-client. Version 2.3.15. Added usage section to README.md.
 ```
+
+The rule for multi-project workspaces is the same as by version-update. 
+
+## 3. Write commit text proposal
+
+Update **only** the workspace-root file: `commit-text-proposal.txt` (in the workspace root directory where this skill file is located, not in sub-project directories).
+
+**Multi-sub-project updates:** If the same commit affects multiple sub-projects, write a separate commit-text parts for each sub-project. Each part should include the sub-project name, the new version, and a short description of the changes made. 
+
 
 ## 4. Commit changes
 If the user explicitly requested to commit changes, call the script `scripts/make-commit.sh`.

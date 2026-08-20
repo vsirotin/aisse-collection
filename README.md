@@ -23,12 +23,9 @@ scripts/symlink-skills.sh --target-project <absolute-path-to-your-project>
 
 This script first ask you about skills, that you want to have in your project. Then it creates symbolic links to the selected skills in your project. 
 
-Below is an example of how to use the script:
+Below is an example of how this script works:
 
-```bash
-
-% scripts/symlink-skills.sh --target-project /Users/vsirotin/VSCodeProjects/app-server     
-
+```
 [INFO] Available skills in /Users/vsirotin/VSCodeProjects/aisse-collection/.github/skills:
 
   1) angular
