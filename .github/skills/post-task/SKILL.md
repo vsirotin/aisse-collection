@@ -3,7 +3,7 @@ name: post-task
 description: Post-task checklist that runs after every agent task that makes essential changes to code, documentation, scripts, or configuration. Covers version bumping, release-notes update, and commit-text proposal. Applied automatically — the agent does not need to be asked.
 metadata:
   author: vsirotin
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Post-Task Checklist
@@ -74,12 +74,28 @@ doc: Project: stop-client. Version 2.3.15. Added usage section to README.md.
 
 The rule for multi-project workspaces is the same as by version-update. 
 
-## 3. Write commit text proposal
+## 3. Project specific versioning
 
-Update **only** the workspace-root file: `commit-text-proposal.txt` (in the workspace root directory where this skill file is located, not in sub-project directories).
+In multi-project workspaces, determine which sub-projects were affected by the
+changes of this task:
+
+1. For each sub-project, check its manifest/config files (e.g. `package.json`,
+   `angular.json`, `pom.xml`, etc.) for files changed by this task.
+2. If a sub-project was affected, apply Rule 1 (version update) to **its own**
+   version file — even if a workspace-level version file also exists.
+   A sub-project may have SEVERAL version carriers (e.g. `src/version.json`
+   and `package.json`) — keep all of them in sync with the same new version.
+3. Sub-projects not touched by this task are not bumped.
+
+The goal: each sub-project carries its own version history reflecting only its
+own changes.
+
+## 4. Write commit text proposal
+
+Update **only** the workspace-root file: `commit-text-proposal.txt` (in the workspace root directory, not in sub-project directories).
 
 **Multi-sub-project updates:** If the same commit affects multiple sub-projects, write a separate commit-text parts for each sub-project. Each part should include the sub-project name, the new version, and a short description of the changes made. 
 
 
-## 4. Commit changes
+## 5. Commit changes
 If the user explicitly requested to commit changes, call the script `scripts/make-commit.sh`.

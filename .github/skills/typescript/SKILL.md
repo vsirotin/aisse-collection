@@ -86,7 +86,7 @@ Declare a logger as a class field using `LoggerFactory.getLogger(...)`. Use the 
 import { LoggerFactory } from '@vsirotin/log4ts';
 
 export class MyComponent {
-  private readonly logger = LoggerFactory.getLogger('<project-name>/app/pages/my/MyComponent');
+  private readonly logger = LoggerFactory.getLogger('eu.sirotin.mimoai.<project-name>/app/pages/my/MyComponent');
 }
 ```
 
@@ -95,7 +95,7 @@ For modules containing free functions (not classes), declare a module-level logg
 ```typescript
 import { LoggerFactory } from '@vsirotin/log4ts';
 
-const logger = LoggerFactory.getLogger('<project-name>/api/session/close/close-handler.ts');
+const logger = LoggerFactory.getLogger('eu.sirotin.mimoai.<project-name>/api/session/close/close-handler.ts');
 ```
 
 ### 1.10.2 Log levels

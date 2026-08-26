@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.1.3 build 6
+doc: Post-task, Angular and TypeScript skills updated.
+
 ## Version: 0.1.2 build 5
 doc: Post-task and rest.API skills updated.
 
