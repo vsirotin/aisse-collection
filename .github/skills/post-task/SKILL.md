@@ -3,7 +3,7 @@ name: post-task
 description: Post-task checklist that runs after every agent task that makes essential changes to code, documentation, scripts, or configuration. Covers version bumping, release-notes update, and commit-text proposal. Applied automatically — the agent does not need to be asked.
 metadata:
   author: vsirotin
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Post-Task Checklist
@@ -31,6 +31,13 @@ Use semantic versioning rules:
 - **Update `datetime`** to the current date and time in ISO 8601 format.
 
 Remember the new version for using in the next step (release notes update).
+
+**IMPORTANT — enumerate ALL version carriers of the affected project(s).** A project's version may be stored in several files that must all be set to the same new version and datetime, e.g.:
+- `version.yaml` / `version.json` (and their copies under `src/`)
+- `package.json`
+- `package-lock.json` (top-level `"version"` and `packages[""].version` — regenerate or edit it whenever `package.json` changes)
+
+Before finishing Rule 1, search the affected project for version files (`find <project-root> -maxdepth 3 -name 'version.yaml' -o -name 'version.json'` plus a `grep '"version"' package*.json`) and update every carrier found. Missing one carrier is the most common versioning mistake.
 
 ### Special case with multi-project workspaces.
 If the workspace contains multiple sub-projects, you should determine which sub-projects were affected by the changes. If the changes affect multiple sub-projects, you should bump versions in all affected sub-projects. If the changes affect only one sub-project, you should bump version only in that sub-project.
@@ -83,8 +90,10 @@ changes of this task:
    `angular.json`, `pom.xml`, etc.) for files changed by this task.
 2. If a sub-project was affected, apply Rule 1 (version update) to **its own**
    version file — even if a workspace-level version file also exists.
-   A sub-project may have SEVERAL version carriers (e.g. `src/version.json`
-   and `package.json`) — keep all of them in sync with the same new version.
+   A sub-project may have SEVERAL version carriers (e.g. `src/version.json`,
+   `version.yaml` and `package.json`) — keep **all** of them in sync with the
+   same new version (see the "enumerate ALL version carriers" note in Rule 1,
+   including `package-lock.json`).
 3. Sub-projects not touched by this task are not bumped.
 
 The goal: each sub-project carries its own version history reflecting only its
