@@ -3,7 +3,7 @@ name: common-development
 description: Common rules for code development that apply across all project types (libraries, CLI tools, services, etc.). Covers development workflow, requirements clarity, bug-fix workflow, logging, coding style, testing discipline, version management, and commit conventions.
 metadata:
   author: vsirotin
-  version: "1.4"
+  version: "1.5"
 ---
 
 ## 1. Common workflow rules
@@ -31,13 +31,21 @@ Use best practices of the programming language, but maintain a common, consisten
 
 If a function uses data from environment variables or files, this must be mentioned in the function's documentation.
 
+## 2.4 Radical simplicity (keep programming elements as simple as possible)
+
+1. **Signal/event only when consumed.** A variable is a signal (or event producer) ONLY if something reacts to its changes (an `effect`, a template binding, a subscriber). No such consumer today → plain private field. Converting later is the legitimate small refactor when a consumer appears.
+2. **No export without external use.** Do not export a type/constant/function unless another module actually uses it now. Speculative exports irritate future agents and invite misuse.
+3. **No speculative future-proofing ("Step N + k" fantasies).** While implementing step N, do not add API for imagined future steps k > 0 — if it is needed, the plan was bad; the legitimate fix is to update the step-N solution in step N + k (e.g. convert a field into a signal, un-private a helper).
+4. **Hide state that must not be misused.** State that is not meant for rendering must not be a public signal bindable from templates. Keep it private; tests assert behavior (signals sent, collaborators called), not internal state.
+
+
 > For testing rules including coverage expectations, naming conventions, organization, execution, and cleanup, see the dedicated [testing](../testing/SKILL.md) skill. Use it when writing, organizing, or running unit tests.
 
-## 2.4 Stop on unsolvable problems
+## 2.5 Stop on unsolvable problems
 
 If you see suddenly that you cannot solve some problem, stop the development and ask me.
 
-## 2.5 Stop on long bug-fix loops
+## 2.6 Stop on long bug-fix loops
 
 If you try to fix the same bug too long (more than 20 iterations), stop the development and ask me.
 

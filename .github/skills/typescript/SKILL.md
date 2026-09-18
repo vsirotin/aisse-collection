@@ -3,7 +3,7 @@ name: typescript
 description: Common rules for TypeScript code development. These guidelines apply to interfaces, types, error handling, async patterns, dependency injection, and module structure.
 metadata:
   author: vsirotin
-  version: "1.5"
+  version: "1.6"
 ---
 
 # 1. Core Principles
@@ -74,7 +74,17 @@ Avoid default exports.
 Reason:
 Better refactoring, clearer dependency graph.
 
-## 1.10 Logging
+## 1.10 Interface changes require build verification
+
+When adding or changing a method on an interface, ALL implementations must be updated. Vitest (unit tests) does NOT do full type-checking — missing implementations only surface during `npm run build` (`tsc`).
+
+After any interface change:
+1. Update every class/object that implements the interface
+2. Run `npm run build` (not just `npm test`) to verify all implementations are complete
+
+Example: Adding `createAnomaly(data: IAnomaly): Promise<void>` to `IDBProvider` requires updating `firebaseProvider`, `testDbProvider`, and any other implementations.
+
+## 1.11 Logging
 
 Every component and service **must** use the `log4ts` library ([source](https://github.com/vsirotin/digital-treasure-chest/tree/f82ee04686934fc6d618eb02eac5a74fdcc7064a/projects/log4ts)) for logging. Do not use `console.log`, `console.error`, or other `console` calls directly.
 

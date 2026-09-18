@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.1.5 build 8
+doc: Skills updated: angular, common-development, typescript. 
+
 ## Version: 0.1.4 build 7
 doc: Post-task updated.
 

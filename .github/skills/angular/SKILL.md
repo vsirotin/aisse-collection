@@ -3,7 +3,7 @@ name: angular
 description: Common rules for Angular code development. These guidelines apply to components, services, modules, dependency injection, and reactive patterns.
 metadata:
   author: vsirotin
-  version: "1.6"
+  version: "1.7"
 ---
 
 # 1. Dependencies
@@ -52,7 +52,18 @@ Unit tests follow the testing skill; additionally:
 
 ---
 
-## 2.5 Logging (@vsirotin/log4ts)
+## 2.5 Page Layout and Vertical Scrolling
+
+Recurring bug class in this project (fixed twice: commit `2fcd0f1` and v0.24.11): pages were not vertically scrollable because the flex/overflow height chain was silently broken. Rules:
+
+- **Angular component hosts are `display: inline` by default.** A component whose template assumes block/flex layout MUST declare its host layout explicitly, e.g. `:host { display: block; }` (simple pages) or `:host { display: flex; flex-direction: column; height: 100%; }` (page shells). An inline host breaks `height: 100%` of its children and makes child `flex: 1` rules ineffective.
+- **Scroll chain:** every ancestor between the viewport and the scrollable content must propagate a definite height (`height: 100%` / `flex: 1` + `min-height: 0`) and exactly ONE element in the chain must own the scrolling (`overflow-y: auto`). Elements that only pass height through must not clip (`overflow: hidden`) unless they are the intended scroll container.
+- **Do not put `min-height: 0` on every flex child by default.** It allows the item to shrink below its content size, silently absorbing overflow — the page then "fits" the viewport with crushed content and nothing can scroll. Set `min-height: 0` only where internal scrolling is intended, and give flexible page areas a usable `min-height` (e.g. px) so short viewports (iPhone SE) overflow and scroll instead of squeezing content away.
+- **Verification:** after layout changes, test at a small viewport (e.g. iPhone SE 375×667) and confirm the bottom-most element is reachable by scrolling. A quick isolation technique: temporarily hide the real content and add many placeholder paragraphs (`<p>X0</p>…`) to see where scrolling breaks.
+
+---
+
+## 2.6 Logging (@vsirotin/log4ts)
 
 Use the `@vsirotin/log4ts` library instead of `console.*` for all runtime logging:
 
