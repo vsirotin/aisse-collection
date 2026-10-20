@@ -1,9 +1,9 @@
 ---
-name: angular-review
-description: Architecture code review for the Angular frontend. Checks changed files against the rules of the angular-development skill (modules, DI, contracts, SFSM, categories), plus whole-file hygiene and test rules, with one rule file per kind of file. Use it when reviewing a diff, a pull request, a set of changed files, or your own work before reporting it as done.
+name: review
+description: Architecture code review for Angular projects. Checks changed files against the rules of the angular-development skill (modules, DI, contracts, SFSM, categories), plus whole-file hygiene and test rules, with one rule file per kind of file. Use it when reviewing a diff, a pull request, a set of changed files, or your own work before reporting it as done.
 metadata:
   author: vsirotin
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Architecture code review
@@ -15,7 +15,7 @@ The rule IDs (M, D, C, S, K) are defined in the [angular-development](../develop
 ## 1. Setup
 
 1. Collect the changed files: `git diff --name-only <base>...HEAD` plus uncommitted changes, or the files edited in the current task.
-2. Run `npm run lint`. Every lint error is a **Blocker**; report it and do not repeat its check by hand.
+2. Run the project's lint (e.g. `npm run lint`). Every lint error is a **Blocker**; report it and do not repeat its check by hand.
 3. Assign each changed file to one or more kinds and apply the matching rule files:
 
 | Kind of file | Rule file |
@@ -46,4 +46,4 @@ End with one verdict: "Ready to merge", "Fix Blockers/Majors first", or a short 
 
 ## 4. When a rule is missing
 
-If you find a problem that no rule covers but that the architecture spec forbids, report it as Major with rule "spec" and propose a new rule (ID and one sentence) for the rule file. If a rule can be checked mechanically, propose adding it to `eslint.config.mjs` or `scripts/check-architecture.mjs` instead.
+If you find a problem that no rule covers but that the architecture spec forbids, report it as Major with rule "spec" and propose a new rule (ID and one sentence) for the rule file. If a rule can be checked mechanically, propose adding it to the project's lint configuration or architecture check scripts instead.

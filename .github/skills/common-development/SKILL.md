@@ -3,14 +3,16 @@ name: common-development
 description: Common rules for code development that apply across all project types (libraries, CLI tools, services, etc.). Covers development workflow, requirements clarity, bug-fix workflow, logging, coding style, testing discipline, version management, and commit conventions.
 metadata:
   author: vsirotin
-  version: "1.5"
+  version: "1.6"
 ---
 
-## 1. Common workflow rules
+# 1. Common workflow rules
 
-### 1.1 Understanding of project-structure
+## 1.1 Understanding of project-structure
 
 If the project has a `site-map.md` in its root, read it before you start. It describes the project structure and the search keywords.
+
+If the project works together with other projects (e.g. a client, a server, a project with integration tests), the site map lists them in a section `## Partner projects`: for each partner its location, its role, how it relates to this project and, for a test project, where its test structure is. Read a partner's own agent instructions before you change anything there.
 
 ## 1.2 Planning
 
@@ -33,8 +35,8 @@ After completing a task that makes essential changes, apply the [post-task](../p
 
 ## 2.1 Logging by default
 
-All functions with many lines (e.g. more as 10 lines)  or short, but very importanf functions must include logging by enty and before and after important steps (e.g. call to external service, important decision points, etc.). Logs should be informative and concise.
-In whole project should be use the same logging library and format.
+All functions with many lines (e.g. more than 10 lines) or short but very important functions must log on entry and before and after important steps (e.g. a call to an external service, important decision points). Logs should be informative and concise.
+The whole project uses the same logging library and format.
 
 ## 2.2 Consistent coding style
 
@@ -56,19 +58,29 @@ If a function uses data from environment variables or files, this must be mentio
 
 ## 2.5 Stop on unsolvable problems
 
-If you see suddenly that you cannot solve some problem, stop the development and ask me.
+If you see suddenly that you cannot solve some problem, stop the development and ask the user.
 
 ## 2.6 Stop on long bug-fix loops
 
-If you try to fix the same bug too long (more than 20 iterations), stop the development and ask me.
+If you try to fix the same bug too long (more than 20 iterations), stop the development and ask the user.
 
+## 2.7 Whole-file responsibility
 
-## 3. Rules for special task types
+The agent that changes a file is responsible for the whole file, not only the changed lines. After editing a file, review all of it:
 
-### 3.1 Feature development
+1. Header, class docs, comments, structure and naming match the current code. No dead or duplicated comment blocks, no stale TODOs.
+2. Docs do not refer to volatile things (plans, issues, release notes, "Step 3"). Only architecture documents may be referenced.
+3. After a rename or move, a search for the old name over the sources, tests and docs finds nothing unexplained.
+4. Comments describe the present code, not its history. History is in git and the release notes.
+
+A project may add its own review rules for this (e.g. in a review skill).
+
+# 3. Rules for special task types
+
+## 3.1 Feature development
 
 > For the full feature development workflow, see the dedicated [feature-development](../feature-development/SKILL.md) skill. Use it when implementing new functionality, processing feature requests, or adding new features.
 
-### 3.2 Bug fixing
+## 3.2 Bug fixing
 
 > For TDD-based bug fixing, see the dedicated [bug-fixing](../bug-fixing/SKILL.md) skill. Use it when investigating, reproducing, and resolving reported defects or unexpected behavior.

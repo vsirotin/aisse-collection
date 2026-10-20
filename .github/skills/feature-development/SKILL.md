@@ -3,7 +3,7 @@ name: feature-development
 description: Workflow for implementing new features and processing issues. Use when adding new functionality, implementing requirements, or processing feature requests.
 metadata:
   author: vsirotin
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Feature Development and Issue Processing Workflow
@@ -28,6 +28,7 @@ When implementing a new feature or processing a feature request, always follow t
 
 These rules from common-development also apply:
 
-- All unit tests in the project must pass after completing development (see rule 9)
-- Follow consistent coding style across the project (see rule 4)
-- Document any environment dependencies used by new functions (see rule 5)
+- All unit tests in the project must pass after completing development (see the [testing](../testing/SKILL.md) skill)
+- Follow consistent coding style across the project (see §2.2)
+- Document any environment dependencies used by new functions (see §2.3)
+- Review the whole of every file you touched (see §2.7)

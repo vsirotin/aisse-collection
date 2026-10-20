@@ -3,7 +3,7 @@ name: testing
 description: Testing discipline covering coverage expectations, test naming conventions, organization, execution requirements, and cleanup. Use when writing, organizing, or running unit tests.
 metadata:
   author: vsirotin
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Testing Rules
@@ -48,4 +48,4 @@ These rules from common-development also apply:
 
 - Tests for features must be developed before or alongside production code (see feature-development skill)
 - Tests for bugs must be written to fail before fixing (see bug-fixing skill)
-- Follow consistent coding style (see rule 4)
+- Follow consistent coding style (see common-development §2.2)

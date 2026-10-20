@@ -7,7 +7,7 @@
 | S2 | Every command in `sfsm.json` has a `case` in the receiver's `handleCommand`; every `sendSignal("X>...")` string appears in `sfsm.json`. Check both directions with grep. |
 | S3 | Signals are sent only by registered controllers. |
 | — | A command handler that starts asynchronous work sends exactly one result signal on every path, including errors. |
-| — | State names follow the existing prefix convention of their sub-machine (`IS:`, `PB:`, `PE:`, `PC:`), and end states start with `E_`. |
-| — | `test/sfsm-behaviour/` golden files are regenerated and reviewed when transitions change. |
+| — | State names follow the existing prefix convention of their sub-machine (e.g. `I:` for an initialization sub-machine), and end states start with `E_`. |
+| — | If the project keeps golden files of the SFSM behaviour (see its site map), they are regenerated and reviewed when transitions change. |
 
 Use the `state-oriented-programming/*` skills for modelling questions.

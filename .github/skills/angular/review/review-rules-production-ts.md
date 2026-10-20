@@ -10,7 +10,7 @@
 | C5 | No new mutual dependency between two modules. A needed back-channel is a Notifier subscription or a `set<What>Updater` registration. | read imports of both modules |
 | C6 | Contract naming and placement as in the development skill. | read |
 | S3 | `sendSignal` appears only in classes extending `TransceiverBase` or `SignalSenderBase`: `grep -rn "sendSignal" src/app --include=*.ts`. | grep |
-| K1 | A class that sends signals or receives commands extends one of the two base classes and is registered in `src/app/app.ts`. | grep `registerTransceiver\|registerSignalSender` |
+| K1 | A class that sends signals or receives commands extends one of the two base classes and is registered in the composition root (M5). | grep `registerTransceiver\|registerSignalSender` |
 | K2 | A class with a shared instance is a controller or has exactly one `@category` (`ui-resource-manager`, `resource-manager`, `resource`, `storage`) that matches its role. A storage implements an interface extending `IStorage`. | lint (A4, A7); read the class doc for the role |
 | K3 | Controllers and UI components talk to resource managers, not to resources; a resource depends only on storage, `@shared` and `@utils`. | lint (A8, UI side); read imports |
 | — | Logging: functions longer than about 10 lines, and important short ones, log on entry and around external calls and decisions. The logger id follows `<domain>.<project>.app/<module>/<Class>`. | read |

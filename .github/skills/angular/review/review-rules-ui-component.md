@@ -12,5 +12,5 @@ UI code may use Angular DI for Angular's own services (`Router`, `MatDialog`, `M
 | U1 | The host declares its layout: `:host { display: ... }` in the component stylesheet. |
 | U2 | In the height chain from the viewport to scrolling content, exactly one element has `overflow-y: auto`; no `min-height: 0` on every flex child. |
 | U3 | `ChangeDetectionStrategy.OnPush`; template-only members are `protected`; derived state is `computed()`; no `effect()` copying signals. |
-| — | Localized texts come from a `public/assets/languages/...` JSON with a default object in the component; new keys exist in all supported languages. |
+| — | Localized texts use the project's localization mechanism (see its site map); new keys exist in all supported languages. |
 | — | A component that registers itself with a DataProvider unregisters in `ngOnDestroy`. |

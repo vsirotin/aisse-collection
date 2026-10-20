@@ -3,7 +3,7 @@ name: angular-development
 description: Rules for writing Angular code in a project with state-oriented architecture (StOP SFSM, pseudo-modules, two kinds of DI). Covers coding style, signals, change detection, layout, logging, and the architecture rules A-M, D, C, S, K with their automated checks. Use it before writing or changing components, services, controllers, contracts, barrels or sfsm.json.
 metadata:
   author: vsirotin
-  version: "2.0"
+  version: "2.1"
 ---
 
 **Scope.** Sections 1–2 apply to every Angular project. Section 3 applies only to projects built with state-oriented architecture, which have a `specs/frontend-architecture/frontend-architecture.md` and a `site-map.md`. Paths and names in its examples come from the MimoAI frontend (`aia-frontend`).
@@ -11,9 +11,9 @@ metadata:
 # 1. Before you start
 
 1. Read the [common-development](../../common-development/SKILL.md) and [typescript](../../typescript/SKILL.md) skills. Their rules apply here too.
-2. Read the project's `site-map.md` to find the module you need. Search it by keyword: `grep -rn "@keywords.*#<topic>" src/app --include=index.ts`.
+2. Read the project's `site-map.md` to find the module you need. In state-oriented projects, search the modules by keyword: `grep -rn "@keywords.*#<topic>" src/app --include=index.ts`.
 3. The architecture spec (`specs/frontend-architecture/frontend-architecture.md`) is authoritative. Section 3 below is its short form. If they disagree, the spec wins; report the difference.
-4. When you are done, run `npm run lint` (ESLint plus `scripts/check-architecture.mjs`) and the full test suite. Both must pass.
+4. When you are done, run the project's lint (e.g. `npm run lint`, in state-oriented projects including the architecture checks) and the full test suite. Both must pass.
 5. To review code, use the [angular-review](../review/SKILL.md) skill.
 
 # 2. Angular coding style
@@ -77,7 +77,7 @@ Each rule has an ID that reviews and plans refer to. *(lint)* means `npm run lin
 - **S1** A behaviour change is a change in `sfsm.json` plus the matching controller method. Components and services do not get new control flow for it.
 - **S2** A row is `[fromState, "<Sender>>Signal", toState, "<Receiver>.command"]`. Sender and receiver prefixes are the controller abbreviations listed in `site-map.md`.
 - **S3** Only controllers registered in the composition root send signals. Pages and services never call `sendSignal`, the hub or the SFSM.
-- **S4** For SFSM modelling use the `state-oriented-programming/*` skills.
+- **S4** For SFSM modelling use the `state-oriented-programming/*` skills if the project has them.
 
 ## K — Categories
 

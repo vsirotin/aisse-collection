@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.1.6 build 9
+doc: Skills made generic: bug-fixing step 6 checks partner projects for integration-test candidates; common-development defines the "Partner projects" site-map section (§1.1) and whole-file responsibility (§2.7); post-task semver examples, carrier lookup and commit step corrected; project-specific paths removed from typescript and angular skills; stale rule references fixed. 
+
 ## Version: 0.1.5 build 8
 doc: Skills updated: angular, common-development, typescript. 
 

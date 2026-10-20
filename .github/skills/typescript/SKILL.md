@@ -3,7 +3,7 @@ name: typescript
 description: Common rules for TypeScript code development. These guidelines apply to interfaces, types, error handling, async patterns, dependency injection, and module structure.
 metadata:
   author: vsirotin
-  version: "1.6"
+  version: "1.7"
 ---
 
 # 1. Core Principles
@@ -66,7 +66,7 @@ Logic stays infrastructure‑agnostic.
 - Logic imports only interfaces
 - Adapters import interfaces
 - Wrappers import logic + adapters
-- Never import Firebase SDK into logic
+- Never import infrastructure SDKs (e.g. Firebase) into logic
 Reason:
 Strict layering = maintainability.
 
@@ -77,27 +77,27 @@ Better refactoring, clearer dependency graph.
 
 ## 1.10 Interface changes require build verification
 
-When adding or changing a method on an interface, ALL implementations must be updated. Vitest (unit tests) does NOT do full type-checking — missing implementations only surface during `npm run build` (`tsc`).
+When adding or changing a method on an interface, ALL implementations must be updated. Test runners such as Vitest do NOT do full type-checking — missing implementations only surface during the type-checking build (`tsc`).
 
 After any interface change:
 1. Update every class/object that implements the interface
-2. Run `npm run build` (not just `npm test`) to verify all implementations are complete
+2. Run the project's type-checking build (e.g. `npm run build` or `npx tsc --noEmit`), not just the tests, to verify all implementations are complete
 
-Example: Adding `createAnomaly(data: IAnomaly): Promise<void>` to `IDBProvider` requires updating `firebaseProvider`, `testDbProvider`, and any other implementations.
+Example: adding `createAnomaly(data: IAnomaly): Promise<void>` to a database-provider interface requires updating the production provider, every test double, and any other implementation.
 
 ## 1.11 Logging
 
 Every component and service **must** use the `log4ts` library ([source](https://github.com/vsirotin/digital-treasure-chest/tree/f82ee04686934fc6d618eb02eac5a74fdcc7064a/projects/log4ts)) for logging. Do not use `console.log`, `console.error`, or other `console` calls directly.
 
-### 1.10.1 Logging Setup
+### 1.11.1 Logging Setup
 
-Declare a logger as a class field using `LoggerFactory.getLogger(...)`. Use the source-code path of the class as the logger ID (recommended for large applications):
+Declare a logger as a class field using `LoggerFactory.getLogger(...)`. Use `<domain>.<product>.<project-name>/` plus the source-code path of the class as the logger ID (recommended for large applications); the prefix is the same in the whole project:
 
 ```typescript
 import { LoggerFactory } from '@vsirotin/log4ts';
 
 export class MyComponent {
-  private readonly logger = LoggerFactory.getLogger('eu.sirotin.mimoai.<project-name>/app/pages/my/MyComponent');
+  private readonly logger = LoggerFactory.getLogger('<domain>.<product>.<project-name>/app/pages/my/MyComponent');
 }
 ```
 
@@ -106,10 +106,10 @@ For modules containing free functions (not classes), declare a module-level logg
 ```typescript
 import { LoggerFactory } from '@vsirotin/log4ts';
 
-const logger = LoggerFactory.getLogger('eu.sirotin.mimoai.<project-name>/api/session/close/close-handler.ts');
+const logger = LoggerFactory.getLogger('<domain>.<product>.<project-name>/api/session/close/close-handler.ts');
 ```
 
-### 1.10.2 Log levels
+### 1.11.2 Log levels
 
 Use the appropriate level for each message:
 
@@ -126,11 +126,11 @@ By default, `log4ts` suppresses `log` and `debug` output (only `error` and `warn
 logger.setLogLevel(0); // show all levels
 ```
 
-### 1.10.3 Logging and testing
+### 1.11.3 Logging and testing
 
 When it is possible to verify internal behaviour by observing `debug`-level log output (captured via a test spy on the logger), **prefer that approach over introducing mocks** for the same purpose. Mocks add coupling and maintenance cost; log-based assertions are lighter and stay close to the real code path.
 
-### 1.10.4 What to log
+### 1.11.4 What to log
 
 Log all essential functions and methods in production code (not tests). "Essential" means functions with more than ~10 lines, or short but important functions (see `common-development` §2.1).
 
@@ -138,7 +138,7 @@ Log all essential functions and methods in production code (not tests). "Essenti
 
 **Backend**: log on entry **and** at each return point. Backend bugs are harder to reproduce in production, so every exit path must be traceable.
 
-### 1.10.5 Log message format
+### 1.11.5 Log message format
 
 Always pass the **function name as the first argument** so logs are greppable and self-describing:
 
@@ -161,19 +161,19 @@ logger.log("extractCloseParams:", "Parameters extracted successfully.");
 return { sessionId, sliceNumber, usedTokens, clientId };
 ```
 
-### 1.10.6 Mask sensitive data
+### 1.11.6 Mask sensitive data
 
-Never log raw sensitive data: user personal data, user IDs, API keys, e-tokens, or passwords. Use the `mask()` helper to obscure them:
+Never log raw sensitive data: user personal data, user IDs, API keys, access tokens, or passwords. Use the project's `mask()` helper to obscure them (if the project has none, add one to its utilities module):
 
 ```typescript
-import { mask } from '<project-name>/utils/secure';
+import { mask } from '<utilities-module>/secure';
 
 logger.log("createEToken:", "eTokenId=", mask(eTokenId));
 ```
 
 `mask(key, visibleStart=2, visibleEnd=2)` keeps the first and last few characters and replaces the middle with `*`. It accepts strings only — convert/guard non-string values before calling it.
 
-### 1.10.7 HTTP status-based log levels
+### 1.11.7 HTTP status-based log levels
 
 When an operation returns an HTTP status code, log by status family:
 
@@ -185,7 +185,7 @@ When an operation returns an HTTP status code, log by status family:
 
 If the project has a central `createErrorResult(...)` helper, it should already apply these levels — do not duplicate the `warn`/`error` call at every return site.
 
-### 1.10.8 Complex functions: log each step
+### 1.11.8 Complex functions: log each step
 
 In functions with multiple sequential steps (e.g. request handlers, business logic), log each essential step using the pattern `"<function-name> Step N:"`:
 
@@ -201,7 +201,7 @@ logger.log("createSessionLogic Step 2:", "Promocode found.");
 
 Log before external calls (DB, AI API) and after them, so latency and failures are visible.
 
-### 1.10.9 Firebase Functions specifics
+### 1.11.9 Firebase Functions specifics
 
 In Firebase Functions projects, require the compat shim once per file so `log4ts` output is forwarded to the Firebase logger:
 
