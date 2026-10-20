@@ -3,7 +3,7 @@ name: bug-fixing
 description: TDD-based workflow for fixing bugs and defects. Use when investigating, reproducing, and resolving reported issues or unexpected behavior.
 metadata:
   author: vsirotin
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Bug-Fixing Workflow (TDD)
@@ -22,7 +22,9 @@ When fixing a bug, always follow this order:
 
 4. **Confirm the test passes** — Run the test to verify it passes. Small adjustments to the implementation or test may be needed, but reducing the number of tests or skipping them should be done only after careful consideration of the consequences.
 
-5. **Report the result** — Document the fix.
+5. **Review the whole updated file** — After each bug fix, perform a code review of the WHOLE file(s) you touched, not only the changed lines — apply the whole-file rules W1–W4 of the `angular-review` skill ([review-rules-whole-file.md](../angular/review/review-rules-whole-file.md)) (header/class doc actual + compact + self-explaining, no duplicate/stale comment blocks, naming, no leftover references). Bugs cluster in files whose documentation drifted away from the code.
+
+6. **Report the result** — Document the fix.
 
 ## Additional Rules
 

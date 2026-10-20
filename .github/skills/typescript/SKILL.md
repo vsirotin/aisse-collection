@@ -8,15 +8,16 @@ metadata:
 
 # 1. Core Principles
 
-## 1.1 Use type for value objects
-Value objects like DataVersion should be defined as type:
+## 1.1 Use interface for data and contracts by default
+Value objects like DataVersion should be defined as interface when the codebase uses `I`-prefixed interfaces (consistent naming wins):
 ```typescript
-export type DataVersion = {
+export interface IDataVersion {
   version: string;
   build: string;
   timestamp: number;
-};
+}
 ```
+Reserve `type` for cases interfaces cannot express: unions, intersections of unions, mapped or conditional types, tuples, and function-type aliases.
 
 ## 1.2 Use interface for contracts
 Interfaces define behavior, not data:

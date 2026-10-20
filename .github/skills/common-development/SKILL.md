@@ -10,9 +10,22 @@ metadata:
 
 ### 1.1 Understanding of project-structure
 
-- If the workflow or some project has in root file `site-map.yaml`, read it to locate relevant files.
+If the project has a `site-map.md` in its root, read it before you start. It describes the project structure and the search keywords.
 
-## 1.2 Post-task checklist
+## 1.2 Planning
+
+Before starting a task, make sure you clearly understand the requirements, dependencies, and potential challenges. Then create a short implementation plan that lists the steps needed to complete the task efficiently.
+Write the plan into a file. Ask the user for the file name. If the user does not provide one, use `TMP/issues/<issue-id>/plan.md` by default, where `<issue-id>` is a very short name or abbreviation of the problem being solved.
+Each step that involves code changes must be verified by running the full unit-test suite (`ALL unit tests`).
+Describe each step in its own paragraph with the following structure:
+- Name
+- State
+- Description
+
+State shows the current status of the step, e.g. "Not Started", "In Progress", or "Completed".
+
+
+## 1.3 Post-task checklist
 
 After completing a task that makes essential changes, apply the [post-task](../post-task/SKILL.md) skill (version bump, release notes, commit text proposal).
 
