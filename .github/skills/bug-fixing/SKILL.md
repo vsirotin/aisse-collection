@@ -3,7 +3,7 @@ name: bug-fixing
 description: TDD-based workflow for fixing bugs and defects. Use when investigating, reproducing, and resolving reported issues or unexpected behavior.
 metadata:
   author: vsirotin
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Bug-Fixing Workflow (TDD)
@@ -31,7 +31,20 @@ When fixing a bug, always follow this order:
 
    Prefer extending an existing integration test to adding a new one. If the bug qualifies, find its place in the test structure of that project (its test catalog or category layout) and propose the entry to the user in the report. Do not change the partner project without the user's consent; when changing it, follow its own rules.
 
-7. **Report the result** — Document the fix, including the proposal of step 6 if there is one.
+7. **Report the result** — Document the fix, including the proposal of step 6 if there is one. If issues were created or updated (see "Bugs across several projects"), list them as links so the user can open them in the browser or the IDE.
+
+## Bugs across several projects
+
+When the cause or the fix of a bug spans this project and its partner projects (common-development §1.1), and the projects use an issue tracker (for example GitHub issues through the `gh` CLI), track the work there:
+
+1. **Agree on the procedure first.** Ask the user once per task how the issues are closed: by commits that reference them, by a comment, or left open for the user. Never commit or close an issue on your own.
+2. **Root issue in the leading project.** Create one root issue in the project that owns the rule or the interface the fix depends on (often the server or the library whose contract changes). It holds the evidence (logs, data), the decisions of the user and the task list of that project.
+3. **Dependent issues in the partner projects.** One issue per partner project that has to change, including the test project when the bug qualifies for integration tests (step 6). Each refers to the root issue, describes only its own part and has its own task list.
+4. **Link them in the tracker, not only in the text.** Make the dependent issues sub-issues of the root issue, and add a "blocked by" dependency on the issues whose results they need. Links across repositories of the same owner work. On GitHub both are set through the REST API, which takes the numeric issue id, not the issue number.
+5. **Work in dependency order.** First the leading project (it provides the contract), then the projects that use it, the test project last. If a partner project has unfinished or uncommitted work, ask the user before starting there.
+6. **Keep the issues current.** Reference the issue in the release notes and the commit text (`Refs <owner>/<repo>#<n>`; a closing keyword only if the user wants issues closed by commits). When a project's part is done, tick its task list and add a comment with the version, the checks that ran and what is left.
+
+Practical hints: check the login and the labels of each repository before creating issues; write long issue texts to a temporary file and pass the file (avoids shell quoting problems with backticks and `$`).
 
 ## Additional Rules
 

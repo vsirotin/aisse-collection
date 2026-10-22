@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.1.7 build 10
+doc: bug-fixing 1.3: new section "Bugs across several projects": agree with the user how issues are closed, a root issue in the leading project (owner of the rule or interface), dependent issues in the partner projects including the test project, linked in the tracker as sub-issues and "blocked by" dependencies, work in dependency order, keep the issues current (references in release notes and commit texts, ticked task lists, progress comments); step 7 reports the issues as links. Learned from the first cross-project bug tracked with GitHub issues (aia-server, aia-frontend, aia-test).
+
 ## Version: 0.1.6 build 9
 doc: Skills made generic: bug-fixing step 6 checks partner projects for integration-test candidates; common-development defines the "Partner projects" site-map section (§1.1) and whole-file responsibility (§2.7); post-task semver examples, carrier lookup and commit step corrected; project-specific paths removed from typescript and angular skills; stale rule references fixed. 
 
