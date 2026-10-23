@@ -3,7 +3,7 @@ name: feature-development
 description: Workflow for implementing new features and processing issues. Use when adding new functionality, implementing requirements, or processing feature requests.
 metadata:
   author: vsirotin
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Feature Development and Issue Processing Workflow
@@ -23,6 +23,8 @@ When implementing a new feature or processing a feature request, always follow t
 4. **Run tests to confirm they pass** — Execute the full test suite. Small adjustments to implementation or tests may be needed to align details, but reducing the number of tests or skipping them is an exception and should be done only after careful consideration of the consequences.
 
 5. **Report the result** — Document the outcome.
+
+6. **Close the issue** — When the feature comes from an issue, close it yourself as soon as it is complete: every item of its task list is done, all checks pass and the work is committed (commit only when the user asks). Close it with a comment that names the version, the commit and the checks that ran. An issue with open items stays open (tick the done items and comment what is left). Issues across several projects follow the [bug-fixing](../bug-fixing/SKILL.md) skill, "Bugs across several projects".
 
 ## Additional Rules
 
