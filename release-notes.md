@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.4.1 build 15
+feat: uncommitted-projects 1.1: the Markdown report gives per project the open command and the changed files in fenced code blocks, which can be copied with one click; the table keeps branch and counts only.
+
 ## Version: 0.4.0 build 14
 feat: new skill uncommitted-projects (version 1.0): reports the projects of a group (file <group>-partner-projects.txt in the head project, symlinks in the members) with uncommitted files or unpushed commits, as Markdown or plain text, with the changed files and the code command that opens each project in VS Code; script list-uncommitted-projects.sh in the skill directory.
 

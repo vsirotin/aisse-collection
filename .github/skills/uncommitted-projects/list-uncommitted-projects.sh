@@ -112,20 +112,28 @@ for group_file in "${group_files[@]}"; do
     echo "## Group \`$group\`: ${#dirty[@]} of ${#projects[@]} projects with uncommitted or unpushed work"
     echo
     if [[ ${#dirty[@]} -gt 0 ]]; then
-      echo "| Project | Branch | Uncommitted files | Unpushed commits | Open in VS Code |"
-      echo "|---------|--------|-------------------|------------------|-----------------|"
+      echo "| Project | Branch | Uncommitted files | Unpushed commits |"
+      echo "|---------|--------|-------------------|------------------|"
       for project in "${dirty[@]}"; do
         check_project "$project"
-        echo "| $(basename "$project") | \`$branch\` | $uncommitted | $unpushed | \`code \"$project\"\` |"
+        echo "| $(basename "$project") | \`$branch\` | $uncommitted | $unpushed |"
       done
       echo
+      # Per project the open command and the changed files in fenced blocks, which a viewer can copy with one click.
       for project in "${dirty[@]}"; do
         check_project "$project"
-        [[ "$uncommitted" -eq 0 ]] && continue
-        echo "**$(basename "$project")**"
+        echo "### $(basename "$project")"
         echo
-        print_changes '- `' '`'
+        echo '```bash'
+        echo "code \"$project\""
+        echo '```'
         echo
+        if [[ "$uncommitted" -gt 0 ]]; then
+          echo '```text'
+          print_changes '' ''
+          echo '```'
+          echo
+        fi
       done
     fi
     [[ -n "$clean" ]] && echo "Clean: ${clean#, }." && echo

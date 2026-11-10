@@ -3,7 +3,7 @@ name: uncommitted-projects
 description: Report which projects of the current project's group(s) hold uncommitted changes or unpushed commits, as Markdown with the changed files and the command that opens each project in VS Code. Use when the user asks what is not committed or pushed, what is still open in the partner projects, or before ending a working session.
 metadata:
   author: vsirotin
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Uncommitted projects
@@ -20,8 +20,9 @@ groups, such as this skill collection, are listed but hold no file. A project ma
    (the path of the skill directory may differ in the project; the script is next to this file). It finds the group
    files in the current directory and in the root of its git repository.
 2. If it reports that no group file exists, tell the user and stop. Do not guess the members of a group.
-3. Report its output as it is: per group a table of the projects with uncommitted files or unpushed commits (branch,
-   counts, the `code "<path>"` command that opens the project in VS Code), the changed files of each, and the clean
+3. Report its output as it is, with its fenced code blocks unchanged (the viewer copies a block with one click): per
+   group a table of the projects with uncommitted files or unpushed commits (branch, counts), then per project a
+   block with the `code "<path>"` command that opens it in VS Code and a block with its changed files, and the clean
    projects. Add nothing that is not in the output.
 4. Do not commit, push or change anything. If the user asks to open a project, run its `code "<path>"` command.
 
