@@ -13,6 +13,10 @@ The repository is currently under development and will be updated with new compo
 
 Contributions from the community are welcome to enhance the collection and expand its capabilities.
 
+# Security audit skills
+
+`.github/skills/security-audit` holds a repeatable full audit: `method.md` describes the steps (tools, checklist, open search, verification, report), and `web-client` and `node-server` hold the general checklists. Rules of a single project, such as its payment flow, belong in a checklist of that project, which its `CLAUDE.md` names.
+
 # How to copy skills to your project
 
 If you have many AI agent supported projects, you need some centralized place to store and manage your skills. This repository is designed for that purpose. You can copy the skills from this repository to your project using the following command:

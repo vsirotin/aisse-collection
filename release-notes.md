@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.2.0 build 12
+feat: new skills security-audit/web-client and security-audit/node-server with the shared method.md, README.md.
+
 ## Version: 0.1.8 build 11
 doc: bug-fixing 1.4 and feature-development 1.2: the agent closes an issue itself as soon as it is complete (task list done, all checks pass, work committed) with a comment naming the version, the commit and the checks; issues with open items stay open, a root issue is closed after its sub-issues; a procedure the user asks for in a task wins. Replaces "ask the user once per task how issues are closed".
 
