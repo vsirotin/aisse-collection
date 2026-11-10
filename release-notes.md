@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.3.0 build 13
+feat: new skill issue-stack (moved from aia-commons, version 1.0): several GitHub issues processed one after another as a stack of pull requests; README.md in the skill directory for the people who review and merge (repository settings, merge sequence, PRs vs. branches, recovery of a closed PR).
+
 ## Version: 0.2.0 build 12
 feat: new skills security-audit/web-client and security-audit/node-server with the shared method.md, README.md.
 
