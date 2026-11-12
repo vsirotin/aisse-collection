@@ -1,9 +1,9 @@
 ---
 name: post-task
-description: Post-task checklist that runs after every agent task that makes essential changes to code, documentation, scripts, or configuration. Covers version bumping, release-notes update, and commit-text proposal. Applied automatically — the agent does not need to be asked.
+description: Post-task checklist that runs after every agent task that makes essential changes to code, documentation, scripts, or configuration. Covers version bumping, release-notes update, manual deployment steps, and commit-text proposal. Applied automatically — the agent does not need to be asked.
 metadata:
   author: vsirotin
-  version: "1.4"
+  version: "1.5"
 ---
 
 # Post-Task Checklist
@@ -101,12 +101,31 @@ changes of this task:
 The goal: each sub-project carries its own version history reflecting only its
 own changes.
 
-## 4. Write commit text proposal
+## 4. Record manual deployment steps
+
+If the current project belongs to a group of projects that is deployed to several stages (for example `test` and
+`production`), and a change of this task needs an activity on a stage that the release and deployment scripts do not
+do by themselves, record this activity for the deployer. Such activities are, for example: data or configuration in
+a database, files in a storage bucket, secrets or settings of a stage, an order between the deployments of the
+projects.
+
+- **Where.** In the file of manual deployment steps of the group. It lives in the group's head project (the project
+  that holds the shared files of the group), and the head project's site map names it. If the group has no such
+  file yet, propose one to the user instead of creating it unasked.
+- **When.** At the time of the change, not at the deployment: the agent that makes the change knows the step.
+- **Entry.** A title with the issue reference; the precondition (the release or step that must be on the stage
+  first, or "none"); one checkbox per stage with the activity and its exact command.
+- **Changes.** If the task changes or makes obsolete an existing entry, update or remove it. The deployer ticks the
+  steps per stage and removes an entry when it is done on the last stage; its history stays in git and in the issue.
+- **Report.** Name the new or changed entry in the report to the user. A change in the head project is a change of
+  that project: it gets its own bookkeeping (Rules 1-3, 5) and commit.
+
+## 5. Write commit text proposal
 
 Update **only** the workspace-root file: `commit-text-proposal.txt` (in the workspace root directory, not in sub-project directories).
 
 **Multi-sub-project updates:** If the same commit affects multiple sub-projects, write a separate commit-text parts for each sub-project. Each part should include the sub-project name, the new version, and a short description of the changes made. 
 
 
-## 5. Commit changes
+## 6. Commit changes
 Commit only if the user explicitly requested it. Use the project's commit script if it has one (e.g. `scripts/make-commit.sh`, which commits with `commit-text-proposal.txt` as the message); otherwise commit with the text of `commit-text-proposal.txt`.

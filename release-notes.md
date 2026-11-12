@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.4.2 build 16
+doc: post-task 1.5: new Rule 4 "Record manual deployment steps": when a change needs an activity on a stage that the release and deployment scripts do not do (database data, bucket files, secrets or settings of a stage, order of deployments), the agent records it at the time of the change in the group's file of manual deployment steps (in the head project, named by its site map; proposed to the user if missing), with issue, precondition and one checkbox per stage; commit text and commit are now Rules 5 and 6.
+
 ## Version: 0.4.1 build 15
 feat: uncommitted-projects 1.1: the Markdown report gives per project the open command and the changed files in fenced code blocks, which can be copied with one click; the table keeps branch and counts only.
 
