@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.4.3 build 17
+doc: bug-fixing 1.5 and feature-development 1.3: an issue with open items is also closed when the user explicitly asks for it or when its open items were moved to other issues; the closing comment names the reason or the issues that continue the work.
+
 ## Version: 0.4.2 build 16
 doc: post-task 1.5: new Rule 4 "Record manual deployment steps": when a change needs an activity on a stage that the release and deployment scripts do not do (database data, bucket files, secrets or settings of a stage, order of deployments), the agent records it at the time of the change in the group's file of manual deployment steps (in the head project, named by its site map; proposed to the user if missing), with issue, precondition and one checkbox per stage; commit text and commit are now Rules 5 and 6.
 
