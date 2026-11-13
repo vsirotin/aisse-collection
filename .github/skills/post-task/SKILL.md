@@ -3,7 +3,7 @@ name: post-task
 description: Post-task checklist that runs after every agent task that makes essential changes to code, documentation, scripts, or configuration. Covers version bumping, release-notes update, manual deployment steps, and commit-text proposal. Applied automatically — the agent does not need to be asked.
 metadata:
   author: vsirotin
-  version: "1.5"
+  version: "1.6"
 ---
 
 # Post-Task Checklist
@@ -113,10 +113,11 @@ projects.
   that holds the shared files of the group), and the head project's site map names it. If the group has no such
   file yet, propose one to the user instead of creating it unasked.
 - **When.** At the time of the change, not at the deployment: the agent that makes the change knows the step.
-- **Entry.** A title with the issue reference; the precondition (the release or step that must be on the stage
-  first, or "none"); one checkbox per stage with the activity and its exact command.
-- **Changes.** If the task changes or makes obsolete an existing entry, update or remove it. The deployer ticks the
-  steps per stage and removes an entry when it is done on the last stage; its history stays in git and in the issue.
+- **Entry.** In the format that the file defines in its header, with the issue reference. Make it concrete, so that
+  the deployer only runs and checks: the exact command, and the data files it needs, prepared by the agent where the
+  file says.
+- **Changes.** If the task changes or makes obsolete an entry of a deployment that has not been done yet, update or
+  remove it. Entries of a done deployment stay as its history.
 - **Report.** Name the new or changed entry in the report to the user. A change in the head project is a change of
   that project: it gets its own bookkeeping (Rules 1-3, 5) and commit.
 

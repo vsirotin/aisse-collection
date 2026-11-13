@@ -1,5 +1,8 @@
 # Release notes
 
+## Version: 0.4.4 build 18
+doc: post-task 1.6: Rule 4 "Record manual deployment steps" no longer prescribes the entry format (title, precondition, a checkbox per stage); an entry follows the format defined in the header of the group's file, concrete for the deployer (exact command, data files prepared by the agent), and entries of a done deployment stay as history.
+
 ## Version: 0.4.3 build 17
 doc: bug-fixing 1.5 and feature-development 1.3: an issue with open items is also closed when the user explicitly asks for it or when its open items were moved to other issues; the closing comment names the reason or the issues that continue the work.
 
